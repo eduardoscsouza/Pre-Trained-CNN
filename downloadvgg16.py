@@ -14,12 +14,12 @@ import sys
 
 #Variaveis de entrada e saida da rede
 in_shape = (224, 224, 3)
+n_classes = 2
+filepath = "vgg16_imgnet.h5"
 if (len(sys.argv) >= 4):
 	in_shape = (int(sys.argv[1]), int(sys.argv[2]), int(sys.argv[3]))
-n_classes = 2
 if (len(sys.argv) >= 5):
 	n_classes = int(sys.argv[4])
-filepath = "vgg16_imgnet.h5"
 if (len(sys.argv) >= 6):
 	filepath = sys.argv[5]
 
