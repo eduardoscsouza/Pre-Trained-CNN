@@ -10,13 +10,18 @@ import sys
 #argv[2] = image width
 #argv[3] = image # of channels
 #argv[4] = # of classes
+#argv[5] = filename to store the generated Model
 
 #Variaveis de entrada e saida da rede
 in_shape = (224, 224, 3)
-n_classes = 10                                                                                                                                                                                                                                                              
-if (len(sys.argv) == 5):
+if (len(sys.argv) >= 4):
 	in_shape = (int(sys.argv[1]), int(sys.argv[2]), int(sys.argv[3]))
+n_classes = 2
+if (len(sys.argv) >= 5):
 	n_classes = int(sys.argv[4])
+filepath = "vgg16_imgnet.h5"
+if (len(sys.argv) >= 6):
+	filepath = sys.argv[5]
 
 #Baixar o modelo treinado na ImageNet sem as camadas de input e output, com max pooling; i.e Baixar camadas convolucionais
 vgg16_imgnet = VGG16(weights='imagenet', include_top=False, input_tensor=None, input_shape=None, pooling='softmax')
@@ -42,4 +47,4 @@ new_vgg16_imgnet.compile(loss='mean_squared_error', optimizer='sgd')
 new_vgg16_imgnet.summary()
 
 #Salvar modelo
-new_vgg16_imgnet.save("vgg16_imgnet.h5")
+new_vgg16_imgnet.save(filepath)
