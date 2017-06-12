@@ -18,8 +18,9 @@ for i in range(test_size):
 	pred_class[i] = np.argmax(predictions[i])
 	right_class[i] = np.argmax(class_test[i])
 
-print(right_class)
-print(pred_class)
+for i in range(10):
+	print("%.3lf " % predictions[0][i], end="")
+print(class_test[0])
 
 erros = np.count_nonzero(right_class - pred_class)
 print("Errors: %d" % erros)

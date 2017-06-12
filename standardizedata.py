@@ -1,4 +1,11 @@
-#Eduardo Santos Carlos de Souza
+#Author: Eduardo Santos Carlos de Souza
+
+#Usage:
+#argv[1] = path with images to standardized
+#argv[2] = name of the folder to store the standardized images
+#argv[3] = standardized height
+#argv[4] = standardized width
+#argv[5] = standardized image type
 
 import cv2
 import os
