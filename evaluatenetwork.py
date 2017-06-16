@@ -26,6 +26,6 @@ labels = np.load(labels_filename, mmap_mode='r')
 cnn = models.load_model(model_filename)
 cnn.summary()
 
-batch_size = 256
+batch_size = 16
 score = cnn.evaluate(images, labels, batch_size=batch_size)
 print("Loss: %.4lf\nAccuracy: %.4lf" % (score[0], score[1]))
