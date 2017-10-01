@@ -45,11 +45,11 @@ img_gen = ImageDataGenerator()
 img_flow = img_gen.flow_from_directory(img_path, target_size=(224, 224), class_mode='categorical', batch_size=img_batch_size, shuffle=False)
 
 out_X_list = np.empty(shape=(0, vgg16_imgnet.get_layer(name=layer_name).output.shape[1]))
-out_Y_list = np.empty(shape=(0))
+out_Y_list = np.empty(shape=(0, img_flow.num_class))
 net_batch_size = 8
 for i in range(ceil(img_flow.samples/img_batch_size)):
 	x, y = img_flow.next()
-	out_Y_list = np.concatenate((out_Y_list, np.argmax(y, axis=1)), axis=0)
+	out_Y_list = np.concatenate((out_Y_list, y), axis=0)
 	remain = img_batch_size
 	while remain > 0:
 		aux = out_layer([x[(img_batch_size-remain):(img_batch_size-remain)+net_batch_size]])[0]
