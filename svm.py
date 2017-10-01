@@ -42,8 +42,6 @@ img_batch_size = 256
 img_gen = ImageDataGenerator()
 img_flow = img_gen.flow_from_directory(img_path, target_size=(224, 224), class_mode='categorical', batch_size=img_batch_size, shuffle=False)
 
-init_clock = time.clock()
-init_time = time.time()
 fc2_out_list = np.empty(shape=(0, 4096))
 Y_list = np.empty(shape=(0))
 net_batch_size = 32
@@ -56,6 +54,8 @@ for i in range(ceil(img_flow.samples/img_batch_size)):
 		fc2_out_list = np.concatenate((fc2_out_list, np.asarray(aux)), axis=0)
 		remain -= net_batch_size
 
+init_clock = time.clock()
+init_time = time.time()
 classifier = svm.SVC()
 score = cross_val_score(classifier, fc2_out_list, Y_list, cv=10)
 
