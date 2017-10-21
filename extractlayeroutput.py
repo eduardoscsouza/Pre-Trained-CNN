@@ -37,7 +37,7 @@ print(weights)
 vgg16 = VGG16(weights='imagenet', include_top=True)
 if weights != "ImageNet":
 	vgg16 = models.load_model(weights)
-vgg16.summary()
+#vgg16.summary()
 
 out_layer = K.function([vgg16.get_layer(index=0).input], [vgg16.get_layer(name=layer_name).output])
 
