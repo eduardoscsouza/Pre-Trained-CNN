@@ -1,9 +1,8 @@
 #!/bin/bash
 
-find ../DADOS1/esouza/Datasets/extracted/fc2/90%/ -type f -name "*imgnet.npz" -exec sh -c 'python svm.py "{}" ../DADOS1/esouza/Results/SVM/90%_imgnet.txt ../DADOS1/esouza/Results/SVM/90%_imgnet.npz' \; > ../DADOS1/esouza/Logs/SVM/svm_imgnet/90%_log.txt 2> ../DADOS1/esouza/Logs/SVM/svm_imgnet/90%_errlog.txt &
-find ../DADOS1/esouza/Datasets/extracted/fc2/70%/ -type f -name "*imgnet.npz" -exec sh -c 'python svm.py "{}" ../DADOS1/esouza/Results/SVM/70%_imgnet.txt ../DADOS1/esouza/Results/SVM/70%_imgnet.npz' \; > ../DADOS1/esouza/Logs/SVM/svm_imgnet/70%_log.txt 2> ../DADOS1/esouza/Logs/SVM/svm_imgnet/70%_errlog.txt &
-find ../DADOS1/esouza/Datasets/extracted/fc2/50%/ -type f -name "*imgnet.npz" -exec sh -c 'python svm.py "{}" ../DADOS1/esouza/Results/SVM/50%_imgnet.txt ../DADOS1/esouza/Results/SVM/50%_imgnet.npz' \; > ../DADOS1/esouza/Logs/SVM/svm_imgnet/50%_log.txt 2> ../DADOS1/esouza/Logs/SVM/svm_imgnet/50%_errlog.txt &
-find ../DADOS1/esouza/Datasets/extracted/fc2/30%/ -type f -name "*imgnet.npz" -exec sh -c 'python svm.py "{}" ../DADOS1/esouza/Results/SVM/30%_imgnet.txt ../DADOS1/esouza/Results/SVM/30%_imgnet.npz' \; > ../DADOS1/esouza/Logs/SVM/svm_imgnet/30%_log.txt 2> ../DADOS1/esouza/Logs/SVM/svm_imgnet/30%_errlog.txt &
-find ../DADOS1/esouza/Datasets/extracted/fc2/10%/ -type f -name "*imgnet.npz" -exec sh -c 'python svm.py "{}" ../DADOS1/esouza/Results/SVM/10%_imgnet.txt ../DADOS1/esouza/Results/SVM/10%_imgnet.npz' \; > ../DADOS1/esouza/Logs/SVM/svm_imgnet/10%_log.txt 2> ../DADOS1/esouza/Logs/SVM/svm_imgnet/10%_errlog.txt &
+for per in {10..90..20}
+do
+	find ../DADOS1/esouza/Datasets/extracted/fc2/$per%/ -type f -name "*imgnet.npz" -exec sh -c 'python svm.py "{}" ../DADOS1/esouza/Results/SVM/$per%_imgnet.txt ../DADOS1/esouza/Results/SVM/$per%_imgnet.npz' \; > ../DADOS1/esouza/Logs/SVM/svm_imgnet/$per%_log.txt 2> ../DADOS1/esouza/Logs/SVM/svm_imgnet/$per%_errlog.txt &
+done
 find ../DADOS1/esouza/Datasets/extracted/fc2/uncompressed/ -type f -name "*imgnet.npz" -exec sh -c 'python svm.py "{}" ../DADOS1/esouza/Results/SVM/uncompressed_imgnet.txt ../DADOS1/esouza/Results/SVM/uncompressed_imgnet.npz' \; > ../DADOS1/esouza/Logs/SVM/svm_imgnet/uncompressed_log.txt 2> ../DADOS1/esouza/Logs/SVM/svm_imgnet/uncompressed_errlog.txt &
 wait
