@@ -58,5 +58,6 @@ for i in range(ceil(img_flow.samples/img_batch_size)):
 		remain -= net_batch_size
 
 np.savez_compressed(out_path, out_X_list, out_Y_list)
+
 print("Output X Shape: " + str(out_X_list.shape))
 print("Output Y Shape: " + str(out_Y_list.shape))

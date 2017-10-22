@@ -1,8 +1,9 @@
 #Author: Eduardo Santos Carlos de Souza
 
 #Usage:
-#argv[1] = path to npz files with arrays
+#argv[1] = path to .npz files with arrays
 #argv[2] = output .npz filename
+#argv[3] = output size
 
 from sklearn.decomposition import PCA
 import numpy as np
@@ -30,6 +31,7 @@ Y_list = in_list['arr_1']
 pca = PCA(n_components=out_size)
 out_X_list = pca.fit_transform(X_list)
 
-np.savez(out_path, out_X_list, Y_list)
-print(out_X_list.shape)
-print(Y_list.shape)
+np.savez_compressed(out_path, out_X_list, Y_list)
+
+print("Output X Shape: " + str(out_X_list.shape))
+print("Output Y Shape: " + str(Y_list.shape))
