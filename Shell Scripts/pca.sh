@@ -1,6 +1,6 @@
 #!/bin/bash
 
-find ../DADOS1/esouza/Datasets/extracted/fc1/ -type f -exec sh -c 'out_filename=../DADOS1/esouza/Datasets/reduced/fc1/1/$(echo "{}" | rev | cut -d'/' -f1-1 | rev); python pca.py "{}" $out_filename 1' \; > ../DADOS1/esouza/Logs/PCA/1_log.txt 1> ../DADOS1/esouza/Logs/PCA/1_errlog.txt &
+find ../DADOS1/esouza/Datasets/extracted/fc2/ -type f -exec sh -c 'out_filename=../DADOS1/esouza/Datasets/reduced/fc2/1/$(echo "{}" | rev | cut -d'/' -f1-1 | rev); python pca.py "{}" $out_filename 1' \; > ../DADOS1/esouza/Logs/PCA/1_log.txt 1> ../DADOS1/esouza/Logs/PCA/1_errlog.txt &
 find ../DADOS1/esouza/Datasets/extracted/fc2/ -type f -exec sh -c 'out_filename=../DADOS1/esouza/Datasets/reduced/fc2/2/$(echo "{}" | rev | cut -d'/' -f1-2 | rev); python pca.py "{}" $out_filename 2' \; > ../DADOS1/esouza/Logs/PCA/2_log.txt 2> ../DADOS1/esouza/Logs/PCA/2_errlog.txt &
 find ../DADOS1/esouza/Datasets/extracted/fc2/ -type f -exec sh -c 'out_filename=../DADOS1/esouza/Datasets/reduced/fc2/4/$(echo "{}" | rev | cut -d'/' -f1-2 | rev); python pca.py "{}" $out_filename 4' \; > ../DADOS1/esouza/Logs/PCA/4_log.txt 2> ../DADOS1/esouza/Logs/PCA/4_errlog.txt &
 find ../DADOS1/esouza/Datasets/extracted/fc2/ -type f -exec sh -c 'out_filename=../DADOS1/esouza/Datasets/reduced/fc2/8/$(echo "{}" | rev | cut -d'/' -f1-2 | rev); python pca.py "{}" $out_filename 8' \; > ../DADOS1/esouza/Logs/PCA/8_log.txt 2> ../DADOS1/esouza/Logs/PCA/8_errlog.txt &
