@@ -52,8 +52,9 @@ except IOError:
 out_dict = {data_name:score}
 if exists:
 	for file in in_npz:
-		out_dict[file] = in_npz[file]
+		if (not file in out_dict):
+			out_dict[file] = in_npz[file]
 	in_npz.close()
 np.savez_compressed(out_npz_path, **out_dict)
 
-print("Number of scores in .npz file" + str(len(out_dict)))
+print("Number of scores in .npz file: " + str(len(out_dict)))	
