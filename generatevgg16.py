@@ -1,10 +1,9 @@
 #Author: Eduardo Santos Carlos de Souza
 
 #Usage:
-#argv[1] = input image height
-#argv[2] = input image width
-#argv[3] = output # of classes
-#argv[4] = filename to store the generated Model
+#argv[1] = .npy file of train dataset 
+#argv[2] = fc2 size
+#argv[3] = filename to store the generated Model
 
 from keras.applications.vgg16 import VGG16
 from keras.layers import Flatten, Dense
@@ -13,15 +12,16 @@ import os.path
 import sys
 
 #Variaveis de entrada e saida da rede
-in_shape = (224, 224, 3)
-n_classes = 1000
+dataset = np.load()
 filename = os.path.join("..", "Data", "vgg16_imgnet.h5")
-if (len(sys.argv) >= 3):
+if (len(sys.argv) >= 2):
 	in_shape = (int(sys.argv[1]), int(sys.argv[2]), 3)
-if (len(sys.argv) >= 4):
+if (len(sys.argv) >= 3):
 	n_classes = int(sys.argv[3])
-if (len(sys.argv) >= 5):
+if (len(sys.argv) >= 4):
 	filename = sys.argv[4]
+
+n_classes = 1000
 
 #Baixar o modelo treinado na ImageNet sem as camadas de input e output, com max pooling; i.e Baixar camadas convolucionais
 vgg16_imgnet = VGG16(weights='imagenet', include_top=False, input_shape=in_shape)
