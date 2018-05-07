@@ -11,10 +11,13 @@ from keras.models import Model, load_model
 import numpy as np
 import sys
 
+
 #Variaveis de entrada e saida da rede
 vgg16_imgnet = load_model(sys.argv[1])
 fc2_size = int(sys.argv[2])
-n_classes = np.load(sys.argv[3])['arr_1'].shape[1]
+arr = np.load(sys.argv[3])
+n_classes = arr['arr_1'].shape[1]
+arr.close()
 filename = sys.argv[4]
 
 print("Network: " + sys.argv[1])
