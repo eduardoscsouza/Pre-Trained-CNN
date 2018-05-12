@@ -15,14 +15,10 @@ import numpy as np
 import os.path
 import sys
 
-img_path = os.path.join("..", "Data", "Datasets", "compressed", "90%", "17flowers")
-out_path = os.path.join("..", "Data", "Datasets", "extracted", "90%", "17flowers_imgnet")
+img_path = sys.argv[1]
+out_path = sys.argv[2]
 layer_name = 'fc2'
 weights = "ImageNet"
-if (len(sys.argv) >= 2):
-	img_path = sys.argv[1]
-if (len(sys.argv) >= 3):
-	out_path = sys.argv[2]
 if (len(sys.argv) >= 4):
 	layer_name = sys.argv[3]
 if (len(sys.argv) >= 5):
@@ -31,12 +27,12 @@ if (len(sys.argv) >= 5):
 print("Input: " + img_path)
 print("Output: " + out_path)
 print("Layer: " + layer_name)
-print("Network Weights: ", end='')
-print(weights)
+print("Network Weights: " + weights)
 
-vgg16 = VGG16(weights='imagenet', include_top=True)
 if weights != "ImageNet":
 	vgg16 = models.load_model(weights)
+else:
+	vgg16 = VGG16(weights='imagenet', include_top=True)
 #vgg16.summary()
 
 out_layer = K.function([vgg16.get_layer(index=0).input], [vgg16.get_layer(name=layer_name).output])
