@@ -33,12 +33,12 @@ img_gen = ImageDataGenerator()
 img_flow = img_gen.flow_from_directory(img_path, target_size=(224, 224), class_mode='categorical', batch_size=img_batch_size, shuffle=True)
 
 #Gerar vetores finais com todas as imagens e labels
-per_class = int(per*(img_flow.samples//img_flow.num_class))
-n = int(per_class*img_flow.num_class)
+per_class = int(per*(img_flow.samples//img_flow.num_classes))
+n = int(per_class*img_flow.num_classes)
 out_idx = 0
 out_X = np.empty(shape=(n, 224, 224, 3))
-out_Y = np.empty(shape=(n, img_flow.num_class))
-class_count = np.zeros(img_flow.num_class)
+out_Y = np.empty(shape=(n, img_flow.num_classes))
+class_count = np.zeros(img_flow.num_classes)
 while(np.min(class_count) < per_class):
 	aux_x, aux_y = img_flow.next()
 	for i in range(aux_x.shape[0]):
