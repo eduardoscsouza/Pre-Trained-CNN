@@ -33,15 +33,21 @@ img_gen = ImageDataGenerator()
 img_flow = img_gen.flow_from_directory(img_path, target_size=(224, 224), class_mode='categorical', batch_size=img_batch_size, shuffle=True)
 
 #Gerar vetores finais com todas as imagens e labels
-n = int(per*img_flow.samples)
-out_X = np.empty(shape=(ceil(n/img_batch_size)*img_batch_size, 224, 224, 3))
-out_Y = np.empty(shape=(ceil(n/img_batch_size)*img_batch_size, img_flow.num_class))
-for i in range(ceil(n/img_batch_size)):
+per_class = int(per*(img_flow.samples//img_flow.num_class))
+n = int(per_class*img_flow.num_class)
+out_idx = 0
+out_X = np.empty(shape=(n, 224, 224, 3))
+out_Y = np.empty(shape=(n, img_flow.num_class))
+class_count = np.zeros(img_flow.num_class)
+while(np.min(class_count) < per_class):
 	aux_x, aux_y = img_flow.next()
-	out_X[i*img_batch_size:(i*img_batch_size)+aux_x.shape[0]] = aux_x
-	out_Y[i*img_batch_size:(i*img_batch_size)+aux_y.shape[0]] = aux_y
-
-out_X, out_Y = out_X[:n], out_Y[:n]
+	for i in range(aux_x.shape[0]):
+		c = np.argmax(aux_y[i])
+		if (class_count[c] < per_class):
+			out_X[out_idx] = aux_x[i]
+			out_Y[out_idx] = aux_y[i]
+			class_count[c] += 1
+			out_idx += 1
 
 np.savez_compressed(out_path, out_X, out_Y)
 
