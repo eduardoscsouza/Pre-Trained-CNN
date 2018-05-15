@@ -42,7 +42,7 @@ img_gen = ImageDataGenerator()
 img_flow = img_gen.flow_from_directory(img_path, target_size=(224, 224), class_mode='categorical', batch_size=img_batch_size, shuffle=False)
 
 out_X_list = np.empty(shape=(0, vgg16.get_layer(name=layer_name).output.shape[1]))
-out_Y_list = np.empty(shape=(0, img_flow.num_class))
+out_Y_list = np.empty(shape=(0, img_flow.num_classes))
 net_batch_size = 64
 for i in range(ceil(img_flow.samples/img_batch_size)):
 	x, y = img_flow.next()
